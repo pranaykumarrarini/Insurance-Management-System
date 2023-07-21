@@ -1,0 +1,41 @@
+{% include 'userHead.html' %}
+<div style="position:absolute;left:0;top:100px;z-index:1000;width:100%;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+             <div class="col-md-4">
+                 <div class="card p-3" style="border-radius: 50px 50px;">
+                 <div class="text-center h4" >Raise Clime Request</div>
+                  <form action="climeRequest1" method="post" enctype="multipart/form-data">
+                      <input type="hidden" name="userPolicy_id" value="{{userPolicy_id}}">
+                      <div class="mt-1">
+                         <div class="mt-2">
+                            <label for="reports" class="form-label">Reports</label>
+                            <input type="file" name="reports" id="reports" required class="form-control">
+                        </div>
+                          <div class="mt-1">
+                              <label for="amount" class="form-label">Amount</label>
+                              <input type="number" min="1" max={{clime_amount}} name="amount" id="amount" required placeholder="Enter Amount" class="form-control">
+                          </div>
+                          <div class="mt-1">
+                              <label for="hospital_id" class="form-label">Choose Hospital</label>
+                              <select name="hospital_id" required id="hospital_id" class="form-control">
+                                 <option value="">Choose Hospital</option>
+                                 {% for hospital in hospitals:%}
+                                 <option value="{{hospital['_id']}}">{{hospital['name']}}</option>
+                                 {% endfor %}
+                             </select>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-3"></div>
+                               <div class="col-md-6 mt-3">
+                                   <input type="submit" value="Send Request" class="btn btn-secondary w-100">
+                               </div>
+                          </div>
+                      </div>
+                  </form>
+                 </div>
+             </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+
+{% include 'adminHead.html'%}
+<div style="position:absolute;left:0;top:100px;z-index:1000;width:100%;">
+<div class="container">
+  <div class="row">
+    <div class="text-center h4">View Hospitals</div>
+    <table class="table table-primary table-bordered mt-4">
+      <tr>
+        <thead>
+          <th>Hospital Name</th>
+          <th>Hospital Type</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>About</th>
+          <th>Address</th>
+          <th>Status</th>
+          <th>Action</th>
+        </thead>
+      </tr>
+      <tbody>
+       {% for hospital in hospitals: %}
+        <td>{{hospital['name']}}</td>
+        <td>{{hospital['hospital_type']}}</td>
+        <td>{{hospital['email']}}</td>
+        <td>{{hospital['phone']}}</td>
+        <td>{{hospital['about']}}</td>
+        <td>{{hospital['address']}}</td>
+        <td>{{hospital['status']}}</td>
+        <td>{% if hospital['status']=='Deactivated': %}
+            <a href="activateHospital?hospital_id={{hospital['_id']}}"  class="btn btn-primary">Activate</a>
+        {% endif %}
+         {% if hospital['status']=='Activated': %}
+            <a href="inactivateHospital?hospital_id={{hospital['_id']}}"  class="btn btn-danger">Deactivate</a>
+        {% endif %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>

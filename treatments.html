@@ -1,0 +1,68 @@
+{% if session["role"] == 'Admin':%}
+    {% include 'adminHead.html' %}
+{% elif session["role"] == 'Hospital':%}
+    {% include 'hospitalHead.html' %}
+{% elif session["role"] == 'User':%}
+    {% include 'userHead.html' %}
+{% else:%}
+    {% include 'head.html' %}
+{% endif %}
+{% if session["role"] == 'Admin':%}
+<div style="position:absolute;left:0;top:100px;z-index:1000;width:100%;">
+<div class="container">
+  <div class="row m-auto">
+     <div class="col-md-3"></div>
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-3">
+      <form action="addTreatments" method="post">
+        <a href="addTreatments" class="btn btn-primary w-100" style="background-color:wheat;color:black;">Treatments</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+    <div style="position:absolute;left:0;top:100px;z-index:1000;width:100%;">
+
+    <div class="container">
+        <div class="row">
+            <div class="text-center" style="font-size:30px;color:black">Treatments</div>
+            {% for treatment in treatments:%}
+            <div class="col-md-4">
+                  <div class="card mt-2 p-3" style="border-radius: 50px 50px;">
+                      <div class="row">
+                           <div class=" col-md-6 mt-1">
+                              <div class="text-muted">Treatment Name</div>
+                              <div class=""><b>{{treatment['treatment_name']}}</b></div>
+                          </div>
+                          {% if session["role"] == 'Hospital':%}
+                          {%set is_linked = get_treatment_id(treatment['_id'])%}
+                          {% if is_linked:%}
+                           <div class=" col-md-6 mt-1">
+                               <div class="mt-1" style="color:blue">Already Available</div>
+                           </div>
+                          {% else %}
+                           <div class=" col-md-6 mt-1">
+                               <a href="makeAsAvailable?treatment_id={{treatment['_id']}}" class="btn btn-primary w-100" style="font-size:15px">Make as Available</a>
+                           </div>
+                          {% endif %}
+                          {% endif %}
+                      </div>
+                      <hr>
+                      <div class="mt-1">
+                          <div class="text-muted">Description</div>
+                          <div class="">{{treatment['description']}}</div>
+                      </div>
+                      <hr>
+                       <div class="mt-1">
+                          <div class="text-muted">Terms & Conditions</div>
+                          <div class="">{{treatment['terms_conditions']}}</div>
+                      </div>
+                  </div>
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>

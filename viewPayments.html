@@ -1,0 +1,51 @@
+{% if session["role"] == 'Admin':%}
+    {% include 'adminHead.html' %}
+{% elif session["role"] == 'Hospital':%}
+    {% include 'hospitalHead.html' %}
+{% elif session["role"] == 'User':%}
+    {% include 'userHead.html' %}
+{% else:%}
+    {% include 'head.html' %}
+{% endif %}
+<div style="position:absolute;left:0;top:100px;z-index:1000;width:100%;">
+    <div class="container">
+         <div class="row">
+             {% for payment in payments: %}
+
+              <div class="col-md-4">
+                   <div class="card mt-2 p-3" style="border-radius: 45px 45px;">
+                       {% if payment['status'] == "Installment Premium Paid by User"%}
+
+                      <div class="mt-2">
+                          <div class="text-muted">Premium Amount</div>
+                          <div class=""><b>$ {{payment['premium_amount']}}</b></div>
+                      </div>
+                      <div class="mt-2">
+                          <div class="text-muted">Date</div>
+                          <div class=""><b>{{payment['date'].date()}} {{payment['date'].strftime("%I")}}:{{payment['date'].strftime("%M")}} {{payment['date'].strftime("%p")}}</b></div>
+                      </div>
+                     <div class="mt-2">
+                          <div class="text-muted">Status</div>
+                          <div class=""><b>{{payment['status']}}</b></div>
+                      </div>
+                       {% endif %}
+                       {% if payment['status'] == status_user_clime_payment%}
+                          <div class="mt-2">
+                              <div class="text-muted">Insurance Amount</div>
+                              <div class=""><b>$ {{payment['insurance_paid_amount']}}</b></div>
+                          </div>
+                          <div class="mt-2">
+                              <div class="text-muted">Date</div>
+                              <div class=""><b>{{payment['date'].date()}} {{payment['date'].strftime("%I")}}:{{payment['date'].strftime("%M")}} {{payment['date'].strftime("%p")}}</b></div>
+                          </div>
+                         <div class="mt-2">
+                              <div class="text-muted">Status</div>
+                              <div class=""><b>{{payment['status']}}</b></div>
+                          </div>
+                       {% endif %}
+                   </div>
+              </div>
+            {% endfor %}
+         </div>
+    </div>
+</div>

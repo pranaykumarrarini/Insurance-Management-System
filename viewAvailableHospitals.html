@@ -1,0 +1,35 @@
+{% include 'userHead.html' %}
+<div style="position:absolute;left:0;top:100px;z-index:1000;width:100%;">
+    <div class="container">
+        <div class="row">
+            {% for treatment in treatments:%}
+            <div class="col-md-4">
+                <div class="card mt-2 p-3" style="border-radius: 50px 50px;">
+                    <div class="mt-1">
+                        <div class="text-muted">Treatment Name</div>
+                        <div class=""><b>{{treatment['treatment_name']}}</b></div>
+                    </div>
+                     <div class="text-center" style="font-size:15px;color:black"><b>Available Hospitals</b></div>
+                    {% for hospital_id in treatment['hospital_ids']:%}
+                    {% set hospital = get_hospital_id(hospital_id)%}
+                    <div class="card mt-2 p-3" style="border-radius: 50px 50px;">
+                        <div class="text-center">Name : <b>{{hospital['name']}}</b></div>
+                        <div class="row">
+                             <div class="col-md-6 mt-1">
+                                <div class="text-muted">Phone Number</div>
+                                <div class="">{{hospital['phone']}}</div>
+                            </div>
+                             <div class="col-md-6 mt-1">
+                                <div class="text-muted">Address</div>
+                                <div class="">{{hospital['address']}}</div>
+                            </div>
+                        </div>
+                       </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

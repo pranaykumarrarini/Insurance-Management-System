@@ -1,0 +1,33 @@
+{% include 'adminHead.html' %}
+<div style="position:absolute;left:0;top:100px;z-index:1000;width:100%;">
+<div class="container">
+     <div class="row">
+         <div class="col-md-2"></div>
+         <div class="col-md-8">
+             <div class="card p-3" style="border-radius: 50px 50px;">
+                 <div class="text-center h4" >Add Treatment</div>
+                  <form action="addTreatments1" method="post">
+                    <div class="mt-2 h6">
+                        <label for="treatment_name" class="form-label">Treatment Name</label>
+                        <input type="text" name="treatment_name" id="treatment_name" required placeholder="Enter Name" class="form-control">
+                    </div>
+                     <div class="mt-2 h6">
+                          <label for="description" class="form-label">Description</label>
+                          <textarea name="description" id="description" required placeholder="Enter Description" class="form-control"></textarea>
+                      </div>
+                        <div class="mt-2 h6">
+                          <label for="terms_conditions" class="form-label">Terms & Conditions</label>
+                          <textarea rows="5" name="terms_conditions" id="terms_conditions" required placeholder="Enter Terms and Conditions" class="form-control"></textarea>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-4"></div>
+                          <div class=" col-md-4 mt-3">
+                             <input type="submit" value="ADD Treatment"  class="btn btn-success w-100">
+                         </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+ </div>
+</div>

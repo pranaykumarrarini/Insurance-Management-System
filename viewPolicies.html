@@ -1,0 +1,73 @@
+{% include 'userHead.html' %}
+<div style="position:absolute;left:0;top:100px;z-index:1000;width:100%;">
+    <div class="container">
+        <div class="row">
+            {% for policy in policies: %}
+            {% set count = user_buy_policy(policy['_id'])%}
+               <div class="col-md-4">
+                   <div class="card mt-2 p-3" style="border-radius: 50px 50px;">
+                       <div class="row">
+                           <div class="col-md-6 mt-1">
+                                 <div class="text-muted">Policy Name</div>
+                                <div class=""><b>{{policy['policy_name']}}</b></div>
+                            </div>
+                             <div class="col-md-6 mt-1">
+                                <div class="text-muted">Insurance Duration</div>
+                                 <div class=""><b>{{policy['insurance_duration']}} Months</b></div>
+                             </div>
+                            <div class="col-md-6 mt-1">
+                                <div class="text-muted">Installment Premium</div>
+                                 <div class=""><b>{{policy['installment_premium']}}</b></div>
+                             </div>
+                             <div class="col-md-6 mt-1">
+                                 <div class="text-muted">Premium Amount</div>
+                                 <div class=""><b>$ {{policy['premium_amount']}}</b></div>
+                             </div>
+                           {% if count == 0:%}
+                           <div class="col-md-6 mt-1">
+                               <a href="buy_policy?policy_id={{policy['_id']}}" class="btn btn-success w-100" style="border-radius: 50px 50px;">Buy Policy</a>
+                           </div>
+                           {% endif %}
+                       </div>
+                       <hr>
+                       <div class="">
+                            <div class="text-center" style="font-size:20px;color:black"><b>Available Treatments</b></div>
+                            {% for treatment_id in policy['treatment_ids']: %}
+                           {% set treatment = get_treatment_id_by_policy(treatment_id)%}
+                           <div class="card mt-2 p-4" style="border-radius: 50px 50px;">
+                           <div class="row">
+                               <div class=" col-md-6 mt-1">
+                                  <div class="text-muted">Treatment Name</div>
+                                  <div class=""><b>{{treatment['treatment_name']}}</b></div>
+                              </div>
+                               {% set is_true = get_treatment_by_hospital_id(treatment['_id'])%}
+                               {% if is_true:%}
+                               <div class=" col-md-6 mt-1">
+                                   <a href="viewAvailableHospitals?treatment_id={{treatment['_id']}}" class="btn btn-primary w-100" style="font-size:11.5px">Available Hospitals</a>
+                               </div>
+                               {% else:%}
+                               <div class=" col-md-6 mt-1">
+                                    <div class="mt-2" style="font-size:15px;color:red">No Available Hospital</div>
+                               </div>
+                               {% endif %}
+                            </div>
+                               <hr>
+                             <div class="">
+                                  <div class="text-muted">Description</div>
+                                  <div class="">{{treatment['description']}}</div>
+                              </div>
+                               <hr>
+                               <div class="">
+                                  <div class="text-muted">Terms & Conditions</div>
+                                  <div class="">{{treatment['terms_conditions']}}</div>
+                              </div>
+                               </div>
+                           {% endfor %}
+                           </div>
+                       </div>
+
+                   </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

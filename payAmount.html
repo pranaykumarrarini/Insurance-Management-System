@@ -1,0 +1,86 @@
+{% if session["role"] == 'Admin':%}
+    {% include 'adminHead.html' %}
+{% elif session["role"] == 'User':%}
+    {% include 'userHead.html' %}
+{% else:%}
+    {% include 'head.html' %}
+{% endif %}
+<script>
+function validate(){
+        var regex_care_name = /^[a-zA-Z ]*$/;
+        let holder_name = document.getElementById("holder_name").value
+        if(!regex_care_name.test(holder_name)){
+            alert("Invalid Name on Card")
+            return false
+        }
+
+        let card_number = document.getElementById("card_number").value
+        if(card_number.length!=16){
+            alert("Card Number Should be 16")
+            return false
+        }
+
+        let expiry_date = document.getElementById("expiry_date").value
+        if(expiry_date.length!=5){
+            alert("Invalid Expire Date")
+            return false
+        }
+
+        let cvv = document.getElementById("cvv").value
+        if(cvv.length!=3){
+            alert("Invalid CVV")
+            return false
+        }
+
+        return true
+    }
+</script>
+
+<div style="position:absolute;left:0;top:100px;z-index:1000;width:100%;">
+    <div class="container">
+        <div class="row">
+             <div class="col-md-4"></div>
+             <div class="col-md-4">
+                 <div class="card p-3" style="border-radius: 50px 50px;">
+                     <form action="payAmount1" method="post" onsubmit="return validate()">
+                         {% if session["role"] == 'Admin':%}
+                         <div class="text-center h4" >Insurance Payment</div>
+                         <input type="hidden" name="user_clime_id" value="{{user_clime_id}}">
+                          <input type="hidden" name="amount" value="{{amount}}">
+                         <div class="mt-2 h5">Amount: ${{amount}}</div>
+                         {% endif %}
+                          {% if session["role"] == 'User':%}
+                         <div class="text-center h4" >Installment Payment</div>
+                         <input type="hidden" name="userPolicy_id" value="{{userPolicy_id}}">
+                          <input type="hidden" name="premium_amount" value="{{premium_amount}}">
+                         <div class="mt-3 h5">Premium Amount: ${{premium_amount}}</div>
+                         {% endif %}
+
+                         <div class="mt-2">
+                             <label class="form-label">Card Number</label>
+                             <input type="number" min="0" name="card_number" required placeholder="Enter Number" id="card_number" class="form-control">
+                         </div>
+                           <div class="mt-1">
+                             <label class="form-label">Holder Name</label>
+                             <input type="text" name="holder_name" required placeholder="Enter Name" id="holder_name" class="form-control">
+                         </div>
+                         <div class="mt-1">
+                             <label class="form-label">CVV</label>
+                             <input type="number" min="0" name="cvv" required placeholder="Enter CVV" id="cvv" class="form-control">
+                         </div>
+                         <div class="mt-1">
+                             <label class="form-label">Expiry Date</label>
+                             <input type="text" min="0" name="expiry_date" required placeholder="Enter Date" id="expiry_date" class="form-control">
+                         </div>
+                         <div class="row">
+                             <div class="col-md-3"></div>
+                             <div class="col-md-6 mt-3">
+                                 <input type="submit" value="Pay Amount" class="btn btn-primary w-100">
+                             </div>
+                         </div>
+                     </form>
+                 </div>
+             </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+{% include 'hospitalHead.html' %}
+<div style="position:absolute;left:0;top:100px;z-index:1000;width:100%;">
+<div class="container">
+     <div class="row">
+         <div class="col-md-4"></div>
+         <div class="col-md-4">
+             <div class="card p-3" style="border-radius: 50px 50px;">
+                 <div class="text-center h4" >Add Policies</div>
+                  <form action="addPolicies1" method="post">
+                    <div class="mt-2 h6">
+                        <label for="policy_name" class="form-label">Policy Name</label>
+                        <input type="text" name="policy_name" id="policy_name" required placeholder="Enter Name" class="form-control">
+                    </div>
+                     <div class="mt-2 h6">
+                          <label for="insurance_duration" class="form-label">Insurance Duration</label>
+                          <input type="number" min="1" name="insurance_duration" id="insurance_duration" required placeholder="Enter Months" class="form-control">
+                      </div>
+                       <div class="mt-2 h6">
+                          <label for="installment_premium" class="form-label">Installment Premium</label>
+                          <input type="text" name="installment_premium" id="installment_premium" required placeholder="Enter Installment" class="form-control">
+                      </div>
+                        <div class="mt-2 h6">
+                            <label for="premium_amount" class="form-label">Premium Amount</label>
+                            <input type="number" min="1" name="premium_amount" id="premium_amount" required placeholder="Enter Amount" class="form-control">
+                      </div>
+                       <div class="mt-2 h6">
+                            <label for="clime_amount" class="form-label">Clime Amount</label>
+                            <input type="number" min="1" name="clime_amount" id="clime_amount" required placeholder="Enter Amount" class="form-control">
+                      </div>
+                      <div class="row">
+                          <div class="col-md-4"></div>
+                          <div class=" col-md-5 mt-3">
+                             <input type="submit" value="ADD Policies"  class="btn btn-success w-100">
+                         </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+ </div>
+</div>
